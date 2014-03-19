@@ -1,0 +1,41 @@
+<form id="ajouterTache" class="form-horizontal">
+
+	<div class="control-group">
+		<label class="control-label" for="nomTache">Nom tache</label>
+		<div class="controls">
+			<input type="text" id="nomTache" name="nomTache" placeholder="nom de la taches ....">
+		</div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="descripTache">Description tache</label>
+		<div class="controls">
+			<input type="text" id="descripTache" name="descripTache" placeholder="Description ....">
+		</div>
+    </div>
+	<div class="control-group">
+		<label class="control-label" for="idPrestation">Id prestation</label>
+		<div class="controls">
+			<select id="idPrestation" name="idPrestation" placeholder="id prestation ...">
+				<option>id prestation</option>
+				<?php 	
+					$query_cmd ="SELECT * FROM prestation";
+					$reponse = ($bdd->query($query_cmd));
+					while($donnees 	= $reponse->fetch())
+					{
+						$idPrestation=$donnees['id'];
+						echo "<option value=".$idPrestation.">".$idPrestation."</option>";
+					}	
+				?>
+			</select>
+		</div>
+    </div>	
+    <div class="control-group">
+		<div class="controls">
+			<button id="ajouterTache_enrg"type="submit" class="btn">Ajouter</button>
+		</div>
+    </div>
+</form>	
+
+<script src="js/script.js"></script>
+
+

@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class blogController extends Controller
 {
-    public function indexAction($nom)
+    public function indexAction($name, $prenom)
     {
-        return $this->render('SdzBlogBundle:Blog:index.html.twig', array('name' => $name));
+        return $this->render('SdzBlogBundle:Blog:index.html.twig', array('name' => $name, 'prenom'=>$prenom));
     }
 }

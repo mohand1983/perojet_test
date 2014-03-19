@@ -1,4 +1,4 @@
 # src/Sdz/BlogBundle/Resources/config/routing.yml
 HelloTheWorld:
-    path:     /{name}{prenom}
+    path:     /{name}.{prenom}
     defaults: { _controller: SdzBlogBundle:Blog:index }
