@@ -11,7 +11,7 @@ class __TwigTemplate_0b3ff1fbba15c8d82a440f8e8d3e84521e12748b5a6ca4c6c187bae7442
 
         $this->blocks = array(
             'title' => array($this, 'block_title'),
-            'body' => array($this, 'block_body'),
+            'sdzblog_body' => array($this, 'block_sdzblog_body'),
         );
     }
 
@@ -28,15 +28,55 @@ class __TwigTemplate_0b3ff1fbba15c8d82a440f8e8d3e84521e12748b5a6ca4c6c187bae7442
     // line 3
     public function block_title($context, array $blocks = array())
     {
+        // line 4
+        echo "  Accueil - ";
         $this->displayParentBlock("title", $context, $blocks);
-        echo " - Index";
+        echo "
+";
     }
 
-    // line 4
-    public function block_body($context, array $blocks = array())
+    // line 6
+    public function block_sdzblog_body($context, array $blocks = array())
     {
-        // line 5
-        echo "    OK, même s'il est pour l'instant un peu vide, mon blog sera trop bien !
+        // line 7
+        echo "  <h2>Liste des articles</h2>
+  <ul>
+    ";
+        // line 9
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getContext($context, "articles"));
+        $context['_iterated'] = false;
+        foreach ($context['_seq'] as $context["_key"] => $context["article"]) {
+            // line 10
+            echo "      <li>
+        <a href=\"";
+            // line 11
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("sdzblog_voir", array("id" => $this->getAttribute($this->getContext($context, "article"), "id"))), "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "titre"), "html", null, true);
+            echo "</a>
+        par ";
+            // line 12
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "auteur"), "html", null, true);
+            echo ",
+        le ";
+            // line 13
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "date"), "d/m/Y"), "html", null, true);
+            echo "
+      </li>
+    ";
+            $context['_iterated'] = true;
+        }
+        if (!$context['_iterated']) {
+            // line 16
+            echo "      <li>Pas (encore !) d'articles</li>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['article'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 18
+        echo "  </ul>
 ";
     }
 
@@ -52,6 +92,6 @@ class __TwigTemplate_0b3ff1fbba15c8d82a440f8e8d3e84521e12748b5a6ca4c6c187bae7442
 
     public function getDebugInfo()
     {
-        return array (  39 => 5,  36 => 4,  29 => 3,);
+        return array (  79 => 18,  72 => 16,  64 => 13,  60 => 12,  54 => 11,  51 => 10,  46 => 9,  42 => 7,  39 => 6,  32 => 4,  29 => 3,);
     }
 }

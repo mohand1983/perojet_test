@@ -7,49 +7,82 @@ class __TwigTemplate_97564d1eb097dbc80d52b6871752f5a1652bf57c974b67bcbcea98a16fc
     {
         parent::__construct($env);
 
-        $this->parent = false;
+        $this->parent = $this->env->loadTemplate("SdzBlogBundle::layout.html.twig");
 
         $this->blocks = array(
+            'title' => array($this, 'block_title'),
+            'sdzblog_body' => array($this, 'block_sdzblog_body'),
         );
+    }
+
+    protected function doGetParent(array $context)
+    {
+        return "SdzBlogBundle::layout.html.twig";
     }
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        // line 2
-        echo "<!DOCTYPE html>
-<html>
-  <head>
-    <title>Bienvenue sur ma première page avec le Site du Zéro !</title>
-  </head>
-  <body>
-    <h1>Lecture d'un article</h1>
-    <p>
-      ";
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
+    }
+
+    // line 5
+    public function block_title($context, array $blocks = array())
+    {
+        // line 6
+        echo "  Lecture d'un article - ";
+        $this->displayParentBlock("title", $context, $blocks);
+        echo "
+";
+    }
+
+    // line 9
+    public function block_sdzblog_body($context, array $blocks = array())
+    {
+        // line 10
+        echo "
+  <h2>";
         // line 11
-        echo "      ";
-        $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute($this->getContext($context, "app"), "session"), "flashbag"), "get", array(0 => "info"), "method"));
-        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-            // line 12
-            echo "        <p>";
-            echo twig_escape_filter($this->env, $this->getContext($context, "message"), "html", null, true);
-            echo "</p>
-      ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 14
-        echo "    </p>
-    <p>
-      Ici nous pourrons lire l'article ayant comme id : ";
-        // line 16
-        echo twig_escape_filter($this->env, $this->getContext($context, "id"), "html", null, true);
-        echo "<br />
-      Mais pour l'instant, nous ne savons pas encore le faire, cela viendra !
-    </p>
-  </body>
-</html>";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "titre"), "html", null, true);
+        echo "</h2>
+  <i>Par ";
+        // line 12
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "auteur"), "html", null, true);
+        echo ", le ";
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "date"), "d/m/Y"), "html", null, true);
+        echo "</i>
+
+  <div class=\"well\">
+    ";
+        // line 15
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getContext($context, "article"), "contenu"), "html", null, true);
+        echo "
+  </div>
+
+  <p>
+    <a href=\"";
+        // line 19
+        echo $this->env->getExtension('routing')->getPath("sdzblog_accueil");
+        echo "\" class=\"btn\">
+      <i class=\"icon-chevron-left\"></i>
+      Retour à la liste
+    </a>
+    <a href=\"";
+        // line 23
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("sdzblog_modifier", array("id" => $this->getAttribute($this->getContext($context, "article"), "id"))), "html", null, true);
+        echo "\" class=\"btn\">
+      <i class=\"icon-edit\"></i>
+      Modifier l'article
+    </a>
+    <a href=\"";
+        // line 27
+        echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("sdzblog_supprimer", array("id" => $this->getAttribute($this->getContext($context, "article"), "id"))), "html", null, true);
+        echo "\" class=\"btn\">
+      <i class=\"icon-trash\"></i>
+      Supprimer l'article
+    </a>
+  </p>
+
+";
     }
 
     public function getTemplateName()
@@ -64,6 +97,6 @@ class __TwigTemplate_97564d1eb097dbc80d52b6871752f5a1652bf57c974b67bcbcea98a16fc
 
     public function getDebugInfo()
     {
-        return array (  47 => 16,  43 => 14,  34 => 12,  29 => 11,  19 => 2,);
+        return array (  78 => 27,  71 => 23,  64 => 19,  57 => 15,  49 => 12,  45 => 11,  42 => 10,  39 => 9,  32 => 6,  29 => 5,);
     }
 }
